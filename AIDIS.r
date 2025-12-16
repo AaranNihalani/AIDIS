@@ -960,27 +960,28 @@ suppressPackageStartupMessages({
   library(tinytable)
 })
 
-dash <- "–"   # dash symbol
-
-#-------------------------------------------------------------------------------
-# Hard-coded table (ALL values must be character to avoid tibble type errors)
-#-------------------------------------------------------------------------------
+dash <- "–"
 
 ame_wide <- tibble::tribble(
-  ~Variable,                                                  ~`Model 1`,                         ~`Model 2`,                         ~`Model 3`,                         ~`Model 4`,                         ~`Model 5`,
-  "Model description",                                       "Logit: MPCE only",                 "Logit: Full controls",            "Logit + State FE",                "OLS + District FE",               "Logit + District FE",
+  ~Variable,                                                  ~`Model 1`, ~`Model 2`, ~`Model 3`, ~`Model 4`, ~`Model 5`,
   
-  "Monthly Per Capita Expenditure (MPCE per 1000 units)",    "1.36",                              "1.25",                             "1.08",                             "0.72",                             "1.13",
-  "Household Size",                                           dash,                                "-0.48",                            "-0.46",                            "-0.06",                            "-0.59",
-  "Land Owned (acres)",                                       dash,                                "2.62",                             "2.55",                             "2.58",                             "2.52",
-  "Urban (1 = Urban, 0 = Rural)",                             dash,                                "3.36",                             "2.58",                             "4.08",                             "2.26",
-  "Caste: SC",                                                dash,                                "-4.71",                            "-5.72",                             "-6.80",                            "-6.24",
-  "Caste: ST",                                                dash,                                "2.09",                            "-2.32",                            "-4.20",                            "-3.69",
-  "Caste: Others",                                            dash,                                "10.78",                             "7.53",                            "6.68",                             "6.16",
-  "Religion: Islam",                                          dash,                                "7.92",                             "3.90",                            "2.57",                             "3.23",
-  "Religion: Christianity",                                   dash,                                "-0.61",                            "-5.58",                            "-8.85",                             "-7.45",
-  "Religion: Others",                                         dash,                                "7.76",                             "5.89",                             "5.67",                             "5.89"
+  "Model description",                                       "Logit: MPCE only", "Logit: Full controls",
+  "Logit + State FE", "OLS + District FE", "Logit + District FE",
+  
+  "Monthly Per Capita Expenditure (MPCE per 1000 units)",    "1.36", "1.25", "1.08", "0.72", "1.13",
+  "Household Size",                                          dash, "-0.48", "-0.46", "-0.06", "-0.59",
+  "Land Owned (acres)",                                      dash, "2.62", "2.55", "2.58", "2.52",
+  "Urban (1 = Urban, 0 = Rural)",                            dash, "3.36", "2.58", "4.08", "2.26",
+  
+  "Caste: SC (ref = OBC)",                                   dash, "-4.71", "-5.72", "-6.80", "-6.24",
+  "Caste: ST (ref = OBC)",                                   dash, "2.09", "-2.32", "-4.20", "-3.69",
+  "Caste: Others (ref = OBC)",                               dash, "10.78", "7.53", "6.68", "6.16",
+  
+  "Religion: Christianity (ref = Hinduism)",                 dash, "-7.92", "-3.90", "-2.57", "-3.23",
+  "Religion: Islam (ref = Hinduism)",                        dash, "-8.53", "-9.49", "-11.42", "-10.67",
+  "Religion: Others (ref = Hinduism)",                       dash, "-0.16", "1.98", "3.10", "2.67"
 )
+
 
 #-------------------------------------------------------------------------------
 # Export publication-ready HTML table
