@@ -831,13 +831,14 @@ suppressPackageStartupMessages({
 # 19.1 Prepare regression dataset
 reg_data <- loans %>%
   mutate(
-    sector = factor(sector, levels = c("Rural", "Urban")),
-    caste = factor(caste),
-    religion = factor(religion),
-    State = factor(State.x),
+    sector   = factor(sector, levels = c("Rural", "Urban")),
+    caste    = factor(caste),
+    religion = relevel(factor(religion), ref = "Hinduism"),
+    State    = factor(State.x),
     District = factor(State_District.x),
-    b4q10dot5 = b4q10dot5 / 1000   # MPCE per 1000 units
+    b4q10dot5 = b4q10dot5 / 1000
   )
+
 
 #----------------------------------------------------------------------------------------
 # 19.2 Define model formulas
