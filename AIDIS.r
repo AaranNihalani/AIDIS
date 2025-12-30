@@ -993,3 +993,82 @@ tt(
 ) |>
   save_tt("FormalBorrowing_AMEs_FINAL.html", overwrite = TRUE)
 
+
+#========================================================================================
+# 20. T-Test Results Table by Formal Lending Status (gt Table, Reported Results Only)
+#========================================================================================
+
+library(gt)
+library(dplyr)
+
+# Manually enter t-test results exactly as reported in the screenshot
+ttest_results <- tibble(
+  Outcome = c(
+    "Land ownership",
+    "Household size",
+    "Monthly per-capita expenditure (MPCE)"
+  ),
+  `Mean (Group 0)` = c(
+    0.2174056,
+    5.447667,
+    11897.74
+  ),
+  `Mean (Group 1)` = c(
+    0.2245728,
+    5.686899,
+    15831.67
+  ),
+  t = c(
+    -5.9158,
+    -30.671,
+    -134.55
+  ),
+  df = c(
+    437546,
+    421707,
+    329388
+  ),
+  p = c(
+    "3.304e-09",
+    "< 2.2e-16",
+    "< 2.2e-16"
+  ),
+  `95% CI for Mean Difference` = c(
+    "[-0.00954, -0.00479]",
+    "[-0.25452, -0.22394]",
+    "[-3991.24, -3876.62]"
+  )
+)
+
+# Create APA-style gt table
+ttest_results %>%
+  gt() %>%
+  tab_header(
+    title = md("**Independent-Samples *t*-Test Results by Formal Lending Status**")
+  ) %>%
+  cols_label(
+    Outcome = "Outcome Variable",
+    `Mean (Group 0)` = md("*M* (No formal lending)"),
+    `Mean (Group 1)` = md("*M* (Formal lending)"),
+    t = md("*t*"),
+    df = md("*df*"),
+    p = md("*p*"),
+    `95% CI for Mean Difference` = md("95% CI")
+  ) %>%
+  fmt_number(
+    columns = c(`Mean (Group 0)`, `Mean (Group 1)`, t),
+    decimals = 3
+  ) %>%
+  fmt_number(
+    columns = df,
+    decimals = 0
+  ) %>%
+  cols_align(
+    align = "center",
+    -Outcome
+  ) %>%
+  tab_source_note(
+    source_note = md(
+      "*Note.* Group 0 = households without formal lending; Group 1 = households with formal lending."
+    )
+  )
